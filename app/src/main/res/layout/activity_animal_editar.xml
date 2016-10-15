@@ -41,6 +41,17 @@
         android:gravity="top|center"
         />
 
+    <CheckBox android:id="@+id/status_animal_disponivel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disponível"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/status_animal_adotado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adotado"
+        android:onClick="onCheckboxClicked"/>
+
     <GridLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

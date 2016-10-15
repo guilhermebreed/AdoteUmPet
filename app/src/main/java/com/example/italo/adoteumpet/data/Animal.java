@@ -9,14 +9,16 @@ public class Animal {
     private String raca;
     private Integer idade;
     private String descricao;
+    private String status;
 
-    public Animal(String nome, Integer idade, String descricao) {
+    public Animal(String nome, Integer idade, String descricao, String status) {
         this.nome = nome;
         this.idade = idade;
         this.descricao = descricao;
+        this.status = status;
     }
 
-    public Animal(){
+    public Animal() {
 
     }
 
@@ -52,9 +54,18 @@ public class Animal {
         this.idade = idade;
     }
 
-    public void modificarAnimal(Animal animal){
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void modificarAnimal(Animal animal) {
         this.nome = animal.getNome();
         this.idade = animal.getIdade();
         this.descricao = animal.getDescricao();
+        this.status = animal.getStatus();
     }
 }
