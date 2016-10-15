@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.example.italo.adoteumpet.R;
 import com.example.italo.adoteumpet.data.Animal;
@@ -21,6 +23,12 @@ public class AnimalEditarActivity extends AppCompatActivity {
     private ControladorAnimal controladorAnimal = new ControladorAnimal();
     private Animal animal = new Animal();
     private Bundle extras;
+
+    private String textoRaca;
+    private int ra;
+    private String textoTipoAnimal;
+    private int tip;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +50,31 @@ public class AnimalEditarActivity extends AppCompatActivity {
         editModificarAnimal = (Button) findViewById(R.id.edit_btnModificar);
         editExcluirAnimal = (Button) findViewById(R.id.edit_btnExcluir);
 
+        //Spinner Raça
+        // Cria um ArraAdapter usando um array de string e um layout padrão de spinner
+        Spinner spnRaca = (Spinner)
+                findViewById(R.id.spnRaca);
+        ArrayAdapter adapterRaca =
+                ArrayAdapter.createFromResource(this, R.array.Raca, android.R.layout.simple_spinner_item);
+        //alterar a fonte de dados(adapter) do Spinner
+        spnRaca.setAdapter(adapterRaca);
+
+        textoRaca = spnRaca.getSelectedItem().toString();
+        ra = spnRaca.getSelectedItemPosition();
+
+
+        //Spinner TipoAnimal
+        // Cria um ArraAdapter usando um array de string e um layout padrão de spinner
+        Spinner spnTipoAnimal = (Spinner)
+                findViewById(R.id.spnTipoAnimal);
+        ArrayAdapter adapterTipoAnimal =
+                ArrayAdapter.createFromResource(this, R.array.TipoAnimal, android.R.layout.simple_spinner_item);
+        //alterar a fonte de dados(adapter) do Spinner
+        spnTipoAnimal.setAdapter(adapterTipoAnimal);
+
+        textoTipoAnimal = spnTipoAnimal.getSelectedItem().toString();
+        tip = spnRaca.getSelectedItemPosition();
+
         editModificarAnimal.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -50,7 +83,8 @@ public class AnimalEditarActivity extends AppCompatActivity {
                 String descricao = editDescricaoAnimal.getText().toString();
                 int idade;
                 idade = Integer.parseInt(editIdadeAnimal.getText().toString());
-                Animal animal = new Animal(nome,idade,descricao);
+                //Modificar depois que modificar o xml
+                Animal animal = new Animal(nome,idade,descricao, "Teste");
 
 
                 controladorAnimal.animais.get(extras.getInt("idModificar")).modificarAnimal(animal);
