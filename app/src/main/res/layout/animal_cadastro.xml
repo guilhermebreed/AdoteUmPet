@@ -39,6 +39,26 @@
         android:text=""
         android:gravity="top|center"
         />
+    <GridLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="1">
+
+        <CheckBox android:id="@+id/status_animal_disponivel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disponível"
+            android:onClick="onCheckboxClicked"
+            android:layout_columnWeight="1"/>
+
+        <CheckBox android:id="@+id/status_animal_adotado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adotado"
+            android:onClick="onCheckboxClicked"
+            android:layout_columnWeight="1"/>
+    </GridLayout>
     <Button
         android:id="@+id/cad_btnIncluir"
         android:layout_width="fill_parent"
