@@ -3,6 +3,7 @@ package com.example.italo.adoteumpet.ui;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+//Comentário inútil
 public class PessoaCadastroEditar extends AppCompatActivity {
 
     @Override
