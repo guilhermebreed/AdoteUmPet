@@ -59,6 +59,11 @@
             android:onClick="onCheckboxClicked"
             android:layout_columnWeight="1"/>
     </GridLayout>
+    <Spinner
+        android:id="@+id/spnRaca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/cad_btnIncluir"
         android:layout_width="fill_parent"

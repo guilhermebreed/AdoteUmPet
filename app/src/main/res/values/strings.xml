@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Adote Um Pet</string>
+    <string-array name="Raca">
+        <item>Bulldog</item>
+        <item>Pastor Alemão</item>
+    </string-array>
 </resources>
