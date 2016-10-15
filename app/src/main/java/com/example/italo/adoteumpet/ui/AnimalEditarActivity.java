@@ -50,7 +50,7 @@ public class AnimalEditarActivity extends AppCompatActivity {
                 String descricao = editDescricaoAnimal.getText().toString();
                 int idade;
                 idade = Integer.parseInt(editIdadeAnimal.getText().toString());
-                Animal animal = new Animal(nome,idade,descricao);
+                Animal animal = new Animal(nome,idade,descricao, "Disponível");
 
 
                 controladorAnimal.animais.get(extras.getInt("idModificar")).modificarAnimal(animal);

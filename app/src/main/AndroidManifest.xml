@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.AnimalActivity" />
-        <activity android:name=".ui.AnimalEditarActivity"></activity>
+        <activity android:name=".ui.AnimalEditarActivity" />
+        <activity android:name=".ui.PessoaCadastroEditar"></activity>
     </application>
 
 </manifest>
