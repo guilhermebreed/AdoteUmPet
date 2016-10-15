@@ -4,6 +4,7 @@ package com.example.italo.adoteumpet.data;
  * Created by Italo on 05/10/2016.
  */
 
+//Alteração
 public class Animal {
     private String nome;
     private String raca;
