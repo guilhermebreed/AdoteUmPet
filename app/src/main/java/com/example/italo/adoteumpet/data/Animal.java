@@ -4,10 +4,9 @@ package com.example.italo.adoteumpet.data;
  * Created by Italo on 05/10/2016.
  */
 
-//Alteração
 public class Animal {
     private String nome;
-    private String raca;
+    private Raca raca;
     private Integer idade;
     private String descricao;
     private String status;
@@ -39,11 +38,11 @@ public class Animal {
         this.nome = nome;
     }
 
-    public String getRaca() {
+    public Raca getRaca() {
         return raca;
     }
 
-    public void setRaca(String raca) {
+    public void setRaca(Raca raca) {
         this.raca = raca;
     }
 
