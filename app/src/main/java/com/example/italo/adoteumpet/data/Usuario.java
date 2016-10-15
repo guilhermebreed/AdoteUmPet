@@ -8,12 +8,13 @@ public class Usuario {
     private String user;
     private String senha;
     private String contato;
+    private Endereco endereco;
 
     public Usuario(String user, String senha, String contato){
         this.user = user;
         this.senha = senha;
         this.contato = contato;
-
+        this.endereco = endereco;
     }
 
     public String getContato() {
@@ -40,5 +41,12 @@ public class Usuario {
         this.user = user;
     }
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 
 }
