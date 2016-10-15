@@ -50,7 +50,7 @@ public class AnimalActivity extends AppCompatActivity{
                     int idade;
                     try {
                         idade = Integer.parseInt(cadIdadeAnimal.getText().toString());
-                        controladorAnimal.animais.add(new Animal(nome, idade, descricao));
+                        controladorAnimal.animais.add(new Animal(nome, idade, descricao, "Disponível"));
 
                         Intent in = new Intent();
                         setResult(1, in);//Here I am Setting the Requestcode 1, you can put according to your requirement
