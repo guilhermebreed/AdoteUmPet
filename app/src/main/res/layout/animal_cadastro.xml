@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome do Animal"
+        android:textSize="20sp"/>
+    <EditText
+        android:id="@+id/cad_nome_animal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text=""/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Idade do Animal"
+        android:textSize="20sp"/>
+    <EditText
+        android:id="@+id/cad_idade_animal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text=""/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descricao"
+        android:textSize="20sp"/>
+    <EditText
+        android:id="@+id/cad_descricao_animal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:gravity="top|center"
+        />
+    <Button
+        android:id="@+id/cad_btnIncluir"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Incluir"
+        android:background="#008000"
+        android:textColor="#eeee"/>
+</LinearLayout>
