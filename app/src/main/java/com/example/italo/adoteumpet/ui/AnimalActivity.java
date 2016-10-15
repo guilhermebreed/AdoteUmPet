@@ -10,8 +10,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.italo.adoteumpet.R;
@@ -29,6 +32,8 @@ public class AnimalActivity extends AppCompatActivity{
     private EditText cadIdadeAnimal;
     private Button cadIncluirAnimal;
     private ControladorAnimal controladorAnimal = new ControladorAnimal();
+    private String texto;
+    private int a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +43,16 @@ public class AnimalActivity extends AppCompatActivity{
         cadNomeAnimal = (EditText) findViewById(R.id.cad_nome_animal);
         cadDescricaoAnimal = (EditText) findViewById(R.id.cad_descricao_animal);
         cadIdadeAnimal = (EditText) findViewById(R.id.cad_idade_animal);
-
         cadIncluirAnimal = (Button) findViewById(R.id.cad_btnIncluir);
+
+        Spinner spnRaca = (Spinner)
+                findViewById(R.id.spnRaca);
+        ArrayAdapter adapter =
+                ArrayAdapter.createFromResource(this, R.array.Raca, android.R.layout.simple_spinner_item);
+        spnRaca.setAdapter(adapter);
+
+        texto = spnRaca.getSelectedItem().toString();
+        a = spnRaca.getSelectedItemPosition();
 
         cadIncluirAnimal.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -50,7 +63,7 @@ public class AnimalActivity extends AppCompatActivity{
                     int idade;
                     try {
                         idade = Integer.parseInt(cadIdadeAnimal.getText().toString());
-                        controladorAnimal.animais.add(new Animal(nome, idade, descricao));
+                        controladorAnimal.animais.add(new Animal(nome, idade, descricao, "Disponível"));
 
                         Intent in = new Intent();
                         setResult(1, in);//Here I am Setting the Requestcode 1, you can put according to your requirement
