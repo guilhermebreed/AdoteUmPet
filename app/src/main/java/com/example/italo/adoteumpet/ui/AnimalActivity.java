@@ -32,8 +32,10 @@ public class AnimalActivity extends AppCompatActivity{
     private EditText cadIdadeAnimal;
     private Button cadIncluirAnimal;
     private ControladorAnimal controladorAnimal = new ControladorAnimal();
-    private String texto;
-    private int a;
+    private String textoRaca;
+    private int ra;
+    private String textoTipoAnimal;
+    private int tip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +47,30 @@ public class AnimalActivity extends AppCompatActivity{
         cadIdadeAnimal = (EditText) findViewById(R.id.cad_idade_animal);
         cadIncluirAnimal = (Button) findViewById(R.id.cad_btnIncluir);
 
+        //Spinner Raça
+        // Cria um ArraAdapter usando um array de string e um layout padrão de spinner
         Spinner spnRaca = (Spinner)
                 findViewById(R.id.spnRaca);
-        ArrayAdapter adapter =
+        ArrayAdapter adapterRaca =
                 ArrayAdapter.createFromResource(this, R.array.Raca, android.R.layout.simple_spinner_item);
-        spnRaca.setAdapter(adapter);
+        //alterar a fonte de dados(adapter) do Spinner
+        spnRaca.setAdapter(adapterRaca);
 
-        texto = spnRaca.getSelectedItem().toString();
-        a = spnRaca.getSelectedItemPosition();
+        textoRaca = spnRaca.getSelectedItem().toString();
+        ra = spnRaca.getSelectedItemPosition();
+
+
+        //Spinner TipoAnimal
+        // Cria um ArraAdapter usando um array de string e um layout padrão de spinner
+        Spinner spnTipoAnimal = (Spinner)
+                findViewById(R.id.spnTipoAnimal);
+        ArrayAdapter adapterTipoAnimal =
+                ArrayAdapter.createFromResource(this, R.array.TipoAnimal, android.R.layout.simple_spinner_item);
+        //alterar a fonte de dados(adapter) do Spinner
+        spnTipoAnimal.setAdapter(adapterTipoAnimal);
+
+        textoTipoAnimal = spnTipoAnimal.getSelectedItem().toString();
+        tip = spnRaca.getSelectedItemPosition();
 
         cadIncluirAnimal.setOnClickListener(new View.OnClickListener(){
             @Override

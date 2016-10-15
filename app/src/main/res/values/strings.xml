@@ -4,4 +4,9 @@
         <item>Bulldog</item>
         <item>Pastor Alemão</item>
     </string-array>
+
+    <string-array name="TipoAnimal">
+        <item>Cachorro</item>
+        <item>Gato</item>
+    </string-array>
 </resources>
