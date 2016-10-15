@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
 
         Bundle extras = new Bundle();
-        extras.putInt("modificar_tudo",position);
+        extras.putInt("idModificar",position);
         Intent it = new Intent(this, AnimalEditarActivity.class);
         it.putExtras(extras);
         startActivityForResult(it, 2);
