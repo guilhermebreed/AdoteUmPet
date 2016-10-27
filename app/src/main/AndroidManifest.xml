@@ -17,7 +17,7 @@
         </activity>
         <activity android:name=".ui.AnimalActivity" />
         <activity android:name=".ui.AnimalEditarActivity" />
-        <activity android:name=".ui.PessoaCadastroEditar"></activity>
+        <activity android:name=".ui.PessoaCadastroEditarActivity"></activity>
     </application>
 
 </manifest>
