@@ -1,6 +1,6 @@
 package com.example.italo.adoteumpet.ui;
 
-import com.example.italo.adoteumpet.data.Animal;
+import com.example.italo.adoteumpet.data.model.Animal;
 
 import java.util.ArrayList;
 import java.util.List;

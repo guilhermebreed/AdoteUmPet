@@ -8,8 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.italo.adoteumpet.R;
-import com.example.italo.adoteumpet.data.Animal;
-import com.example.italo.adoteumpet.ui.ControladorAnimal;
+import com.example.italo.adoteumpet.data.model.Animal;
 
 import java.util.List;
 

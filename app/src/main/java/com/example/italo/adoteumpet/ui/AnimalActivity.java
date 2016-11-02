@@ -4,13 +4,8 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,8 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.italo.adoteumpet.R;
-import com.example.italo.adoteumpet.data.Animal;
-import com.example.italo.adoteumpet.ui.ControladorAnimal;
+import com.example.italo.adoteumpet.data.model.Animal;
 
 /**
  * Created by Italo on 06/10/2016.

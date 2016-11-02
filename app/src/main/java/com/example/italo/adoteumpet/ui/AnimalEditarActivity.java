@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.italo.adoteumpet.R;
-import com.example.italo.adoteumpet.data.Animal;
+import com.example.italo.adoteumpet.data.model.Animal;
 
 public class AnimalEditarActivity extends AppCompatActivity {
     private EditText editNomeAnimal;
