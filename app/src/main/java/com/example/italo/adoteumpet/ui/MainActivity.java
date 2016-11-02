@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         IAnimalApi api = restAdapter.create(IAnimalApi.class);
 
-        api.getFeed("animal", new Callback<IAnimalApi>() {
+        api.getFeed("1", new Callback<IAnimalApi>() {
             @Override
             public void success(IAnimalApi iAnimalApi, Response response) {
                 tv.setText("Animal" +animal.getNomeAnimal()+ "Raça: "

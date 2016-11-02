@@ -7,13 +7,14 @@ import com.example.italo.adoteumpet.data.model.AnimalApi;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;
+import retrofit.http.Query;
 
 /**
  * Created by guilh on 02/11/2016.
  */
 
 public interface IAnimalApi {
-    @GET("/{animal}")
+    @GET("/animal/")
     //Call<AnimalApi> animais();
-    public void getFeed(@Path("animal") String animal, Callback<IAnimalApi> response);
+    public void getFeed(@Query("id") String animal, Callback<IAnimalApi> response);
 }
