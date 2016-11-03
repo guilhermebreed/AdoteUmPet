@@ -4,7 +4,10 @@ import android.telecom.Call;
 
 import com.example.italo.adoteumpet.data.model.AnimalApi;
 
+import java.util.List;
+
 import retrofit.Callback;
+import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -14,7 +17,11 @@ import retrofit.http.Query;
  */
 
 public interface IAnimalApi {
-    @GET("/animal/")
+    //@GET("/animal/")
     //Call<AnimalApi> animais();
-    public void getFeed(@Query("id") String animal, Callback<IAnimalApi> response);
+    //public void getFeed(@Query("id") String animal, Callback<IAnimalApi> response);
+
+    @GET("/animal")
+    public void getFeed(Callback<List<AnimalApi>> response);
+
 }

@@ -14,6 +14,8 @@ import com.example.italo.adoteumpet.R;
 import com.example.italo.adoteumpet.ui.adapter.AnimalAdapter;
 import com.example.italo.adoteumpet.data.model.AnimalApi;
 
+import java.util.List;
+
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -24,7 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button newButton;
     private ListView animaisList;
     private TextView tv;
-    private AnimalApi animal;
+    //private AnimalApi animal;
+    AnimalApi animal = new AnimalApi();
 
     private ControladorAnimal controladorAnimal;
     private AnimalAdapter adapter;
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         newButton = (Button) findViewById(R.id.new_button);
-        animaisList = (ListView) findViewById(R.id.animais_list);
+        animaisList = (ListView) findViewById(R.id.animai_list);
         tv = (TextView) findViewById(R.id.testid);
 
         controladorAnimal = new ControladorAnimal();
@@ -52,20 +55,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String API = "http://192.168.1.3:3000/api";
 
-        RestAdapter restAdapter = new RestAdapter.Builder().setLogLevel(RestAdapter.LogLevel.FULL).setEndpoint(API).build();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setEndpoint(API)
+                .build();
 
         IAnimalApi api = restAdapter.create(IAnimalApi.class);
 
-        api.getFeed("1", new Callback<IAnimalApi>() {
+        api.getFeed(new Callback<List<AnimalApi>>() {
             @Override
-            public void success(IAnimalApi iAnimalApi, Response response) {
-                tv.setText("Animal" +animal.getNomeAnimal()+ "Raça: "
-                        +animal.getRaca()+ "Idade: " +animal.getIdade()+ "Descricao: " +animal.getDescricao());
+            public void success(List<AnimalApi> animaisApi, Response response) {
+                tv.setText("Id: " + animal.getId()
+                        + "Nome: " + animal.getNomeAnimal()
+                        + "Raça: " + animal.getRaca()
+                        + "Idade: " + animal.getIdade()
+                        + "Descricao: " + animal.getDescricao());
             }
 
             @Override
             public void failure(RetrofitError error) {
-                tv.setText("Não salvou hahahaha pq:  "+error.getMessage());
+                tv.setText("Não salvou hahahaha pq:  " + error.getMessage());
             }
         });
     }
