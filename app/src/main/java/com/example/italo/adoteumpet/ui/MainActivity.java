@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         newButton = (Button) findViewById(R.id.new_button);
-        animaisList = (ListView) findViewById(R.id.animai_list);
+        animaisList = (ListView) findViewById(R.id.animais_list);
         tv = (TextView) findViewById(R.id.testid);
 
         controladorAnimal = new ControladorAnimal();
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v){
         //startActivityForResult(new Intent(this, AnimalActivity.class), 1);
 
-        String API = "http://192.168.1.3:3000/api";
+        String API = "http://191.7.225.120:3000/api";
 
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setLogLevel(RestAdapter.LogLevel.FULL)
@@ -65,11 +65,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         api.getFeed(new Callback<List<AnimalApi>>() {
             @Override
             public void success(List<AnimalApi> animaisApi, Response response) {
-                tv.setText("Id: " + animal.getId()
-                        + "Nome: " + animal.getNomeAnimal()
-                        + "Raça: " + animal.getRaca()
-                        + "Idade: " + animal.getIdade()
-                        + "Descricao: " + animal.getDescricao());
+                if(!animaisApi.isEmpty()) {
+                    for (AnimalApi animal : animaisApi) {
+                        controladorAnimal.animais.add(animal);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override

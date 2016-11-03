@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.italo.adoteumpet.R;
 import com.example.italo.adoteumpet.data.model.Animal;
+import com.example.italo.adoteumpet.data.model.AnimalApi;
 
 /**
  * Created by Italo on 06/10/2016.
@@ -75,7 +76,7 @@ public class AnimalActivity extends AppCompatActivity{
                     int idade;
                     try {
                         idade = Integer.parseInt(cadIdadeAnimal.getText().toString());
-                        controladorAnimal.animais.add(new Animal(nome, idade, descricao, "Disponível"));
+                        controladorAnimal.animais.add(new AnimalApi(nome, idade, descricao));
 
                         Intent in = new Intent();
                         setResult(1, in);//Here I am Setting the Requestcode 1, you can put according to your requirement

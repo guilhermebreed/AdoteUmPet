@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.italo.adoteumpet.R;
 import com.example.italo.adoteumpet.data.model.Animal;
+import com.example.italo.adoteumpet.data.model.AnimalApi;
 
 import java.util.List;
 
@@ -16,11 +17,11 @@ import java.util.List;
  * Created by Italo on 06/10/2016.
  */
 
-public class AnimalAdapter extends ArrayAdapter<Animal>{
+public class AnimalAdapter extends ArrayAdapter<AnimalApi>{
     private Context context;
-    private List<Animal> animalList;
+    private List<AnimalApi> animalList;
 
-    public AnimalAdapter (Context context, List<Animal> animalList){
+    public AnimalAdapter (Context context, List<AnimalApi> animalList){
         super(context,0,animalList);
         this.context = context;
         this.animalList = animalList;
@@ -28,14 +29,14 @@ public class AnimalAdapter extends ArrayAdapter<Animal>{
 
     @Override
     public View getView (int position, View view, ViewGroup parent){
-        Animal animal = animalList.get(position);
+        AnimalApi animal = animalList.get(position);
 
         if(view == null){
             view = LayoutInflater.from(context).inflate(R.layout.item, null);
         }
 
         TextView txtDesc = (TextView) view.findViewById(R.id.nome_pet);
-        txtDesc.setText(animal.getNome());
+        txtDesc.setText(animal.getNomeAnimal());
 
         return view;
     }

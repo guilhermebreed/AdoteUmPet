@@ -28,6 +28,15 @@ public class AnimalApi {
     @SerializedName("descricao")
     private String descricao;
 
+    public AnimalApi(String nomeAnimal, Integer idade, String descricao) {
+        this.nomeAnimal = nomeAnimal;
+        this.idade = idade;
+        this.descricao = descricao;
+    }
+
+    public AnimalApi() {
+    }
+
     public String getId() {
         return id;
     }
@@ -66,5 +75,11 @@ public class AnimalApi {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public void modificarAnimal(AnimalApi animal) {
+        this.nomeAnimal = animal.getNomeAnimal();
+        this.idade = animal.getIdade();
+        this.descricao = animal.getDescricao();
     }
 }
