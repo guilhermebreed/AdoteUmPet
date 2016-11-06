@@ -4,13 +4,8 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,8 +13,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.italo.adoteumpet.R;
-import com.example.italo.adoteumpet.data.Animal;
-import com.example.italo.adoteumpet.ui.ControladorAnimal;
+import com.example.italo.adoteumpet.data.model.Animal;
+import com.example.italo.adoteumpet.data.model.AnimalApi;
+
+//import retrofit.Callback;
+//import retrofit.RestAdapter;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Italo on 06/10/2016.
@@ -47,7 +47,8 @@ public class AnimalActivity extends AppCompatActivity{
         cadIdadeAnimal = (EditText) findViewById(R.id.cad_idade_animal);
         cadIncluirAnimal = (Button) findViewById(R.id.cad_btnIncluir);
 
-        //Spinner Raça
+
+        /*//Spinner Raça
         // Cria um ArraAdapter usando um array de string e um layout padrão de spinner
         Spinner spnRaca = (Spinner)
                 findViewById(R.id.spnRaca);
@@ -70,29 +71,28 @@ public class AnimalActivity extends AppCompatActivity{
         spnTipoAnimal.setAdapter(adapterTipoAnimal);
 
         textoTipoAnimal = spnTipoAnimal.getSelectedItem().toString();
-        tip = spnRaca.getSelectedItemPosition();
+        tip = spnRaca.getSelectedItemPosition();*/
 
         cadIncluirAnimal.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                if(verificarCampos()) {
-                    String nome = cadNomeAnimal.getText().toString();
-                    String descricao = cadDescricaoAnimal.getText().toString();
-                    int idade;
-                    try {
-                        idade = Integer.parseInt(cadIdadeAnimal.getText().toString());
-                        controladorAnimal.animais.add(new Animal(nome, idade, descricao, "Disponível"));
+                //Rest Adapter
+                String API = "http://192.168.1.6:3000/api/";
 
-                        Intent in = new Intent();
-                        setResult(1, in);//Here I am Setting the Requestcode 1, you can put according to your requirement
-                        finish();
-                    }catch(Exception ex){
-                        Toast.makeText(AnimalActivity.this, "Campo Idade Aceita Somente numeros!", Toast.LENGTH_SHORT).show();
-                        destacarCampos(2);
-                    }
-                }else{
-                    Toast.makeText(AnimalActivity.this, "Verifique os campos destacados, queremos o melhor para seu animal!", Toast.LENGTH_SHORT).show();
-                }
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(API)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                IAnimalApi service = retrofit.create(IAnimalApi.class);
+
+                    Animal animal = new Animal();
+                    animal.setNomeAnimal(cadNomeAnimal.getText().toString());
+                    animal.setDescricao(cadDescricaoAnimal.getText().toString());
+                    animal.setIdade(Integer.parseInt(cadIdadeAnimal.getText().toString()));
+
+                    //Callback<AnimalApi> animalCall = api.
+
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.example.italo.adoteumpet.ui;
 
-import com.example.italo.adoteumpet.data.Animal;
+import com.example.italo.adoteumpet.data.model.Animal;
+import com.example.italo.adoteumpet.data.model.AnimalApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +11,9 @@ import java.util.List;
  */
 
 public class ControladorAnimal {
-    public static List<Animal> animais = new ArrayList<Animal>();
+    public static List<AnimalApi> animais = new ArrayList<>();
 
-    public static List<Animal> getAnimais() {
+    public static List<AnimalApi> getAnimais() {
         return animais;
     }
 

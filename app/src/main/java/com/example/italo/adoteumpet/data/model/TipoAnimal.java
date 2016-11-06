@@ -1,4 +1,4 @@
-package com.example.italo.adoteumpet.data;
+package com.example.italo.adoteumpet.data.model;
 
 /**
  * Created by Alexandre on 15/10/2016.

@@ -8,7 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.italo.adoteumpet.R;
-import com.example.italo.adoteumpet.data.Animal;
+import com.example.italo.adoteumpet.data.model.Animal;
+import com.example.italo.adoteumpet.data.model.AnimalApi;
 
 public class AnimalEditarActivity extends AppCompatActivity {
     private EditText editNomeAnimal;
@@ -19,7 +20,7 @@ public class AnimalEditarActivity extends AppCompatActivity {
     private Button editExcluirAnimal;
 
     private ControladorAnimal controladorAnimal = new ControladorAnimal();
-    private Animal animal = new Animal();
+    private AnimalApi animal = new AnimalApi();
     private Bundle extras;
 
     @Override
@@ -28,14 +29,14 @@ public class AnimalEditarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_animal_editar);
 
         extras  = getIntent().getExtras();
-        int i = extras.getInt("modificar_tudo");
+        int i = extras.getInt("idModificar");
         animal.modificarAnimal(controladorAnimal.animais.get(i));
 
         editNomeAnimal = (EditText) findViewById(R.id.edit_nome_animal);
         editDescricaoAnimal = (EditText) findViewById(R.id.edit_descricao_animal);
         editIdadeAnimal = (EditText) findViewById(R.id.edit_idade_animal);
 
-        editNomeAnimal.setText(animal.getNome());
+        editNomeAnimal.setText(animal.getNomeAnimal());
         editIdadeAnimal.setText(animal.getIdade().toString());
         editDescricaoAnimal.setText(animal.getDescricao());
 
@@ -50,7 +51,7 @@ public class AnimalEditarActivity extends AppCompatActivity {
                 String descricao = editDescricaoAnimal.getText().toString();
                 int idade;
                 idade = Integer.parseInt(editIdadeAnimal.getText().toString());
-                Animal animal = new Animal(nome,idade,descricao, "Disponível");
+                AnimalApi animal = new AnimalApi(nome,idade,descricao);
 
 
                 controladorAnimal.animais.get(extras.getInt("idModificar")).modificarAnimal(animal);

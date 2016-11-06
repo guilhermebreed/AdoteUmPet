@@ -35,6 +35,5 @@ public class PessoaCadastroEditarActivity extends AppCompatActivity {
         cancelar = (Button) findViewById(R.id.btnCancelar);
     }
 
-    public
 
 }

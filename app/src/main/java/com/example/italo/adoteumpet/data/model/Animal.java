@@ -1,18 +1,21 @@
-package com.example.italo.adoteumpet.data;
+package com.example.italo.adoteumpet.data.model;
+
+import java.io.Serializable;
 
 /**
  * Created by Italo on 05/10/2016.
  */
 
-public class Animal {
-    private String nome;
+public class Animal{
+    private int _id;
+    private String nomeAnimal;
     private Raca raca;
     private Integer idade;
     private String descricao;
     private String status;
 
     public Animal(String nome, Integer idade, String descricao, String status) {
-        this.nome = nome;
+        this.nomeAnimal = nome;
         this.idade = idade;
         this.descricao = descricao;
         this.status = status;
@@ -28,14 +31,6 @@ public class Animal {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public Raca getRaca() {
@@ -62,8 +57,24 @@ public class Animal {
         this.status = status;
     }
 
+    public int get_id() {
+        return _id;
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
+    }
+
+    public String getNomeAnimal() {
+        return nomeAnimal;
+    }
+
+    public void setNomeAnimal(String nomeAnimal) {
+        this.nomeAnimal = nomeAnimal;
+    }
+
     public void modificarAnimal(Animal animal) {
-        this.nome = animal.getNome();
+        this.nomeAnimal = animal.getNomeAnimal();
         this.idade = animal.getIdade();
         this.descricao = animal.getDescricao();
         this.status = animal.getStatus();
