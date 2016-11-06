@@ -17,5 +17,9 @@ public class ControladorAnimal {
         return animais;
     }
 
+    public void zerarLista(){
+        animais.removeAll(animais);
+    }
+
 
 }

@@ -20,9 +20,9 @@ public interface IAnimalApi {
     //public void getFeed(@Query("id") String animal, Callback<IAnimalApi> response);
 
     @GET("Animal")
-    retrofit2.Call<List<Animal>> getAnimais();
+    retrofit2.Call<List<AnimalApi>> getAnimais();
 
-    @POST("/animal")
-    Callback<AnimalApi> postAnimal(@Body Animal animal); //@Body: Todos os parâmetro do Animal
+    @POST("animal")
+    Callback<AnimalApi> postAnimal(@Body AnimalApi animalApi); //@Body: Todos os parâmetro do Animal
 
 }

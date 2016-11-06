@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tv;
     //private AnimalApi animal;
     AnimalApi animal = new AnimalApi();
+    //A String de localização da API
+    String API = "http://192.168.1.6:3000/api/";
 
     private ControladorAnimal controladorAnimal;
     private AnimalAdapter adapter;
@@ -55,61 +57,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         animaisList.setOnItemClickListener(this);
         newButton.setOnClickListener(this);
 
-        //Rest Adapter
-
-        //URL Base
-        //Rest Adapter
-        String API = "http://192.168.1.6:3000/api/";
-
-        //Gson g = new GsonBuilder().registerTypeAdapter(Animal.class, new AnimalDes()).create();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        IAnimalApi service = retrofit.create(IAnimalApi.class);
-        Call<List<Animal>> animais = service.getAnimais();
-
-        animais.enqueue(new Callback<List<Animal>>() {
-            @Override
-            public void onResponse(Call<List<Animal>> call, Response<List<Animal>> response) {
-                if(response.isSuccessful()){
-                    List<Animal> animals = response.body();
-                    for(Animal a: animals){
-                        adapter.notifyDataSetChanged();
-                    }
-                }else{
-                    tv.setText("Erro");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Animal>> call, Throwable t) {
-                tv.setText("Não foi possível listar");
-            }
-        });
-
+        atualizarLista();
     }
 
     @Override
     public void onClick(View v){
         startActivityForResult(new Intent(this, AnimalActivity.class), 1);
-
-
     }
 
     @Override
     protected void onActivityResult(int codigo, int resultado, Intent intent){
         if(resultado == 1){
             Toast.makeText(this,"Cadastrador com Sucesso!!", Toast.LENGTH_SHORT).show();
+            atualizarLista();
             adapter.notifyDataSetChanged();
         }else if(resultado == 2) {
             Toast.makeText(this, "Modificado com Sucesso!!", Toast.LENGTH_SHORT).show();
+            atualizarLista();
             adapter.notifyDataSetChanged();
         }else if(resultado == 3){
             Toast.makeText(this, "Excluido com Sucesso!!", Toast.LENGTH_SHORT).show();
             adapter.notifyDataSetChanged();
+            atualizarLista();
         }
     }
 
@@ -121,6 +90,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent it = new Intent(this, AnimalEditarActivity.class);
         it.putExtras(extras);
         startActivityForResult(it, 2);
+    }
 
+    public void atualizarLista(){
+        //Rest Adapter
+        //URL Base
+        //Rest Adapter
+        //Gson g = new GsonBuilder().registerTypeAdapter(Animal.class, new AnimalDes()).create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(API)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        IAnimalApi service = retrofit.create(IAnimalApi.class);
+        final Call<List<AnimalApi>> animais = service.getAnimais();
+
+        animais.enqueue(new Callback<List<AnimalApi>>() {
+            @Override
+            public void onResponse(Call<List<AnimalApi>> call, Response<List<AnimalApi>> response) {
+                if(response.isSuccessful()){
+                    controladorAnimal.zerarLista();
+                    List<AnimalApi> animals = response.body();
+                    for(AnimalApi a: animals){
+                        controladorAnimal.animais.add(a);
+                        adapter.notifyDataSetChanged();
+                    }
+                }else{
+                    tv.setText("Erro");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<AnimalApi>> call, Throwable t) {
+                tv.setText("Não foi possível listar");
+            }
+        });
     }
 }
