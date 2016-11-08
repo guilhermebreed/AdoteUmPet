@@ -3,6 +3,7 @@ package com.example.italo.adoteumpet.ui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -113,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     List<AnimalApi> animals = response.body();
                     for(AnimalApi a: animals){
                         controladorAnimal.animais.add(a);
+
                         adapter.notifyDataSetChanged();
                     }
                 }else{

@@ -5,7 +5,7 @@ import com.example.italo.adoteumpet.data.model.AnimalApi;
 
 import java.util.List;
 
-import retrofit2.Callback;
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -20,9 +20,9 @@ public interface IAnimalApi {
     //public void getFeed(@Query("id") String animal, Callback<IAnimalApi> response);
 
     @GET("Animal")
-    retrofit2.Call<List<AnimalApi>> getAnimais();
+    Call<List<AnimalApi>> getAnimais();
 
-    @POST("animal")
-    Callback<AnimalApi> postAnimal(@Body AnimalApi animalApi); //@Body: Todos os parâmetro do Animal
+    @POST("Animal")
+    Call<AnimalApi> postAnimal(@Body Animal animal); //@Body: Todos os parâmetro do Animal
 
 }

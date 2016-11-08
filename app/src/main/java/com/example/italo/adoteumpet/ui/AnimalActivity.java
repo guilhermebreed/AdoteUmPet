@@ -5,6 +5,7 @@ import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,6 +19,9 @@ import com.example.italo.adoteumpet.data.model.AnimalApi;
 
 //import retrofit.Callback;
 //import retrofit.RestAdapter;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -30,6 +34,7 @@ public class AnimalActivity extends AppCompatActivity{
     private EditText cadNomeAnimal;
     private EditText cadDescricaoAnimal;
     private EditText cadIdadeAnimal;
+    private EditText cadRacaAnimal;
     private Button cadIncluirAnimal;
     private ControladorAnimal controladorAnimal = new ControladorAnimal();
     private String textoRaca;
@@ -45,8 +50,8 @@ public class AnimalActivity extends AppCompatActivity{
         cadNomeAnimal = (EditText) findViewById(R.id.cad_nome_animal);
         cadDescricaoAnimal = (EditText) findViewById(R.id.cad_descricao_animal);
         cadIdadeAnimal = (EditText) findViewById(R.id.cad_idade_animal);
+        cadRacaAnimal = (EditText) findViewById(R.id.cad_raca_animal);
         cadIncluirAnimal = (Button) findViewById(R.id.cad_btnIncluir);
-
 
         /*//Spinner Raça
         // Cria um ArraAdapter usando um array de string e um layout padrão de spinner
@@ -90,8 +95,23 @@ public class AnimalActivity extends AppCompatActivity{
                     animal.setNomeAnimal(cadNomeAnimal.getText().toString());
                     animal.setDescricao(cadDescricaoAnimal.getText().toString());
                     animal.setIdade(Integer.parseInt(cadIdadeAnimal.getText().toString()));
+                    animal.setRaca(cadRacaAnimal.getText().toString());
 
-                    //Callback<AnimalApi> animalCall = api.
+                    Call<AnimalApi> animalPost = service.postAnimal(animal);
+                    animalPost.enqueue(new Callback<AnimalApi>() {
+                        @Override
+                        public void onResponse(Call<AnimalApi> call, Response<AnimalApi> response) {
+                            int statusCode = response.code();
+
+                            AnimalApi animalapi = response.body();
+                            Log.d("Salvar animal", "animal salvo" + statusCode);
+                        }
+
+                        @Override
+                        public void onFailure(Call<AnimalApi> call, Throwable t) {
+                            Log.d("Salvar animal", "Erro"+ t.getMessage());
+                        }
+                    });
 
             }
         });

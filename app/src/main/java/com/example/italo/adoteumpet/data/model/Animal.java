@@ -9,13 +9,14 @@ import java.io.Serializable;
 public class Animal{
     private int _id;
     private String nomeAnimal;
-    private Raca raca;
+    private String raca;
     private Integer idade;
     private String descricao;
     private String status;
 
-    public Animal(String nome, Integer idade, String descricao, String status) {
+    public Animal(String nome, String raca, Integer idade, String descricao, String status) {
         this.nomeAnimal = nome;
+        this.raca = raca;
         this.idade = idade;
         this.descricao = descricao;
         this.status = status;
@@ -33,11 +34,11 @@ public class Animal{
         this.descricao = descricao;
     }
 
-    public Raca getRaca() {
+    public String getRaca() {
         return raca;
     }
 
-    public void setRaca(Raca raca) {
+    public void setRaca(String raca) {
         this.raca = raca;
     }
 
