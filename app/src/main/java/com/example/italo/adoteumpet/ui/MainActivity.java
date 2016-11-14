@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             adapter.notifyDataSetChanged();
         }else if(resultado == 3){
             Toast.makeText(this, "Excluido com Sucesso!!", Toast.LENGTH_SHORT).show();
-            adapter.notifyDataSetChanged();
             atualizarLista();
+            adapter.notifyDataSetChanged();
         }
     }
 
@@ -114,9 +114,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     List<AnimalApi> animals = response.body();
                     for(AnimalApi a: animals){
                         controladorAnimal.animais.add(a);
-
-                        adapter.notifyDataSetChanged();
                     }
+                    adapter.notifyDataSetChanged();
                 }else{
                     tv.setText("Erro");
                 }

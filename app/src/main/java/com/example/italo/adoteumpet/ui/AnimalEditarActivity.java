@@ -11,6 +11,12 @@ import com.example.italo.adoteumpet.R;
 import com.example.italo.adoteumpet.data.model.Animal;
 import com.example.italo.adoteumpet.data.model.AnimalApi;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class AnimalEditarActivity extends AppCompatActivity {
     private EditText editNomeAnimal;
     private EditText editDescricaoAnimal;
@@ -65,6 +71,33 @@ public class AnimalEditarActivity extends AppCompatActivity {
         editExcluirAnimal.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                String API = "http://192.168.1.6:3000/api/";
+                AnimalApi animalExcluir = controladorAnimal.animais.get(extras.getInt("idModificar"));
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(API)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                IAnimalApi service = retrofit.create(IAnimalApi.class);
+
+                Call<AnimalApi> excluir = service.deleteAnimal(animalExcluir.getId());
+
+                excluir.enqueue(new Callback<AnimalApi>() {
+                    @Override
+                    public void onResponse(Call<AnimalApi> call, Response<AnimalApi> response) {
+                        Intent in = new Intent();
+                        setResult(3,in);//Here I am Setting the Requestcode 1, you can put according to your requirement
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailure(Call<AnimalApi> call, Throwable t) {
+                        Intent in = new Intent();
+                        setResult(3,in);//Here I am Setting the Requestcode 1, you can put according to your requirement
+                        finish();
+                    }
+                });
+
                 controladorAnimal.animais.remove(extras.getInt("idModificar"));
                 Intent in = new Intent();
                 setResult(3,in);//Here I am Setting the Requestcode 1, you can put according to your requirement

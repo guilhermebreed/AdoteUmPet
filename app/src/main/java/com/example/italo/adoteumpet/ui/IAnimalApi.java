@@ -7,8 +7,10 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * Created by guilh on 02/11/2016.
@@ -25,4 +27,6 @@ public interface IAnimalApi {
     @POST("Animal")
     Call<AnimalApi> postAnimal(@Body Animal animal); //@Body: Todos os parâmetro do Animal
 
+    @DELETE("Animal/{id}")
+    Call<AnimalApi> deleteAnimal(@Path("id") String id);
 }
