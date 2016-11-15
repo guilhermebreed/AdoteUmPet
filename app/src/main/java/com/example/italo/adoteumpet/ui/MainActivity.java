@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ListView animaisList;
     private TextView tv;
     private EditText pesquisa;
+    private int opcao;
     //private AnimalApi animal;
     AnimalApi animal = new AnimalApi();
     //A String de localização da API
@@ -66,8 +67,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         animaisList.setOnItemClickListener(this);
         newButton.setOnClickListener(this);
 
+        pesquisaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String raca = String.valueOf(pesquisa.getText());
+                if(raca == null || raca.equalsIgnoreCase("")) {
+                    controladorAnimal.getAnimaisOrdenado(raca,0);
+                }else if(raca != null){
+                    try {
+                        Integer.parseInt(raca);
+                        controladorAnimal.getAnimaisOrdenado(raca, 3);
+                    }catch (Exception ex){
+                        controladorAnimal.getAnimaisOrdenado(raca, 1);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+                //filtro();
+            }
+        });
         atualizarLista();
-        filtro();
     }
 
     @Override
@@ -119,11 +137,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onResponse(Call<List<AnimalApi>> call, Response<List<AnimalApi>> response) {
                 if(response.isSuccessful()){
-                    controladorAnimal.zerarLista();
+                    controladorAnimal.zerarLista(1);
                     List<AnimalApi> animals = response.body();
-                    for(AnimalApi a: animals){
-                        controladorAnimal.animais.add(a);
-                    }
+                    controladorAnimal.setAnimais(animals);
+                    controladorAnimal.setAnimaisListaCompleta(animals);
                     adapter.notifyDataSetChanged();
                 }else{
                     tv.setText("Erro");
@@ -155,16 +172,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(response.isSuccessful()){
                     List<AnimalApi> filtroAnimal = response.body();
                     controladorAnimal.zerarLista();
-                    controladorAnimal.animais = filtroAnimal;
-                    //adapter.notifyDataSetChanged();
+                    controladorAnimal.setAnimais(filtroAnimal);
+                    adapter.notifyDataSetChanged();
                 }else{
-                    tv.setText("Não foi possível pesquisar");
+                    tv.setText("Não foi possível pesquisar este infeliz");
                 }
             }
 
             @Override
             public void onFailure(Call<List<AnimalApi>> call, Throwable t) {
-                tv.setText("Não foi possível pesquisar");
+                Toast.makeText(MainActivity.this, "Não foi possível pesquisar Falhou pq: "+t.getMessage(), Toast.LENGTH_LONG).show();
+
             }
         });
 
