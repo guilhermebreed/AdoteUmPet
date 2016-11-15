@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //private AnimalApi animal;
     AnimalApi animal = new AnimalApi();
     //A String de localização da API
-    String API = "http://192.168.1.6:3000/api/";
+
 
     private ControladorAnimal controladorAnimal;
     private AnimalAdapter adapter;
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Rest Adapter
         //Gson g = new GsonBuilder().registerTypeAdapter(Animal.class, new AnimalDes()).create();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API)
+                .baseUrl(IAnimalApi.API_LOCATION)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

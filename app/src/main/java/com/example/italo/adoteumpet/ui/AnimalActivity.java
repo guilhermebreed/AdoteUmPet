@@ -81,11 +81,9 @@ public class AnimalActivity extends AppCompatActivity{
         cadIncluirAnimal.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //Rest Adapter
-                String API = "http://192.168.1.6:3000/api/";
-
+                //Rest Adapte
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(API)
+                        .baseUrl(IAnimalApi.API_LOCATION)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
