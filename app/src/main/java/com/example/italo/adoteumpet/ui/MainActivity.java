@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void filtro(){
        AnimalApi animal = new AnimalApi();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API)
+                .baseUrl(IAnimalApi.API_LOCATION)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
