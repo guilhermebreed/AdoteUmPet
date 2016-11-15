@@ -11,6 +11,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by guilh on 02/11/2016.
@@ -29,4 +30,7 @@ public interface IAnimalApi {
 
     @DELETE("Animal/{id}")
     Call<AnimalApi> deleteAnimal(@Path("id") String id);
+
+    @GET("Animal/{raca}")
+    Call<List<AnimalApi>> getAnimalByRaca(@Path("raca") String raca);
 }

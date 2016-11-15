@@ -81,5 +81,6 @@ public class AnimalApi {
         this.nomeAnimal = animal.getNomeAnimal();
         this.idade = animal.getIdade();
         this.descricao = animal.getDescricao();
+        this.raca = animal.getRaca();
     }
 }

@@ -7,9 +7,12 @@ import android.text.Html;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 import com.example.italo.adoteumpet.R;
 import com.example.italo.adoteumpet.data.model.Animal;
@@ -33,8 +36,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private Button newButton;
+    private Button pesquisaBtn;
     private ListView animaisList;
     private TextView tv;
+    private EditText pesquisa;
     //private AnimalApi animal;
     AnimalApi animal = new AnimalApi();
     //A String de localização da API
@@ -51,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         newButton = (Button) findViewById(R.id.new_button);
         animaisList = (ListView) findViewById(R.id.animais_list);
         tv = (TextView) findViewById(R.id.testid);
+        pesquisa = (EditText) findViewById(R.id.filtroRaca);
+        pesquisaBtn = (Button) findViewById(R.id.btnFiltro);
+
 
         controladorAnimal = new ControladorAnimal();
         adapter = new AnimalAdapter(this,controladorAnimal.getAnimais());
@@ -59,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         newButton.setOnClickListener(this);
 
         atualizarLista();
+        filtro();
     }
 
     @Override
@@ -126,5 +135,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tv.setText("Não foi possível listar");
             }
         });
+    }
+
+    public void filtro(){
+       AnimalApi animal = new AnimalApi();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(API)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        String raca = String.valueOf(pesquisa.getText());
+
+        IAnimalApi service = retrofit.create(IAnimalApi.class);
+        final Call<List<AnimalApi>> getRaca = service.getAnimalByRaca(pesquisa.getText().toString().trim());
+
+        getRaca.enqueue(new Callback<List<AnimalApi>>() {
+            @Override
+            public void onResponse(Call<List<AnimalApi>> call, Response<List<AnimalApi>> response) {
+                if(response.isSuccessful()){
+                    List<AnimalApi> filtroAnimal = response.body();
+                    controladorAnimal.zerarLista();
+                    controladorAnimal.animais = filtroAnimal;
+                    //adapter.notifyDataSetChanged();
+                }else{
+                    tv.setText("Não foi possível pesquisar");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<AnimalApi>> call, Throwable t) {
+                tv.setText("Não foi possível pesquisar");
+            }
+        });
+
     }
 }

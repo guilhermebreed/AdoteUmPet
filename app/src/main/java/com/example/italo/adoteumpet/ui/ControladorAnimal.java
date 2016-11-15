@@ -17,6 +17,8 @@ public class ControladorAnimal {
         return animais;
     }
 
+    public static String getAnimaisRaca(AnimalApi raca){return raca.getRaca();}
+
     public void zerarLista(){
         animais.removeAll(animais);
     }
