@@ -20,6 +20,7 @@ public interface IAnimalApi {
     //@GET("/animal/")
     //Call<AnimalApi> animais();
     //public void getFeed(@Query("id") String animal, Callback<IAnimalApi> response);
+    String API_LOCATION = "http://192.168.1.6:3000/api/";
 
     @GET("Animal")
     Call<List<AnimalApi>> getAnimais();

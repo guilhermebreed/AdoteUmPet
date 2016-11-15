@@ -71,10 +71,10 @@ public class AnimalEditarActivity extends AppCompatActivity {
         editExcluirAnimal.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                String API = "http://192.168.1.6:3000/api/";
+
                 AnimalApi animalExcluir = controladorAnimal.animais.get(extras.getInt("idModificar"));
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(API)
+                        .baseUrl(IAnimalApi.API_LOCATION)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -97,8 +97,7 @@ public class AnimalEditarActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-
-                controladorAnimal.animais.remove(extras.getInt("idModificar"));
+                
                 Intent in = new Intent();
                 setResult(3,in);//Here I am Setting the Requestcode 1, you can put according to your requirement
                 finish();
