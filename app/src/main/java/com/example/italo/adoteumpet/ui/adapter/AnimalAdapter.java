@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.italo.adoteumpet.R;
@@ -36,6 +37,8 @@ public class AnimalAdapter extends ArrayAdapter<AnimalApi>{
         }
 
         TextView txtDesc = (TextView) view.findViewById(R.id.nome_pet);
+        ImageView imgFoto = (ImageView) view.findViewById(R.id.imagem_pet);
+        imgFoto.setImageResource(R.mipmap.dogimg);
         txtDesc.setText(animal.getNomeAnimal());
 
         return view;

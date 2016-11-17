@@ -3,7 +3,11 @@ package com.example.italo.adoteumpet.ui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -60,12 +64,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pesquisa = (EditText) findViewById(R.id.filtroRaca);
         pesquisaBtn = (Button) findViewById(R.id.btnFiltro);
 
-
         controladorAnimal = new ControladorAnimal();
         adapter = new AnimalAdapter(this,controladorAnimal.getAnimais());
         animaisList.setAdapter(adapter);
         animaisList.setOnItemClickListener(this);
         newButton.setOnClickListener(this);
+
+        pesquisa.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String raca = String.valueOf(pesquisa.getText());
+                if(raca == null || raca.equalsIgnoreCase("")) {
+                    controladorAnimal.getAnimaisOrdenado(raca,0);
+                }else if(raca != null){
+                    try {
+                        Integer.parseInt(raca);
+                        controladorAnimal.getAnimaisOrdenado(raca, 3);
+                    }catch (Exception ex){
+                        controladorAnimal.getAnimaisOrdenado(raca, 1);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         pesquisaBtn.setOnClickListener(new View.OnClickListener() {
             @Override

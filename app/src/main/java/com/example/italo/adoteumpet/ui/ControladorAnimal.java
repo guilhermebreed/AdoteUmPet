@@ -35,7 +35,8 @@ public class ControladorAnimal {
         else if(opcao == 1) {
             for (int index = animais.size() - 1; index >= 0; index--) {
                 AnimalApi corrente = animais.get(index);
-                if (pesquisa.equalsIgnoreCase(corrente.getRaca().toString().trim())) {
+
+                if (corrente.getRaca().toString().toLowerCase().contains(pesquisa.toLowerCase())) { //pesquisa.equalsIgnoreCase(corrente.getRaca().toString().trim())
                     resultado.add(corrente);
                 }
             }
