@@ -1,8 +1,11 @@
 package com.example.italo.adoteumpet.ui;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +27,7 @@ public class AnimalEditarActivity extends AppCompatActivity {
 
     private Button editModificarAnimal;
     private Button editExcluirAnimal;
+    private Button editLigar;
 
     private ControladorAnimal controladorAnimal = new ControladorAnimal();
     private AnimalApi animal = new AnimalApi();
@@ -48,6 +52,9 @@ public class AnimalEditarActivity extends AppCompatActivity {
 
         editModificarAnimal = (Button) findViewById(R.id.edit_btnModificar);
         editExcluirAnimal = (Button) findViewById(R.id.edit_btnExcluir);
+        editLigar = (Button) findViewById(R.id.edit_btnLigar);
+        //chama a função pra ver oque a pessoa vai poder enchergar (não sei portugues... Visivelmente percebe-se kkk)
+        verificarCampos();
 
         editModificarAnimal.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -103,5 +110,44 @@ public class AnimalEditarActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        editLigar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+
+                    //Tipos de chamadas
+                        //ACTION_DIAL
+                        // ACTION_CALL
+
+                    Intent chamada = new Intent(Intent.ACTION_DIAL);
+
+                    //Pegar o telefone da pessoa que vai estar dentro de animal
+                    chamada.setData(Uri.parse("tel:"+998064079));
+
+                    startActivity(chamada);
+
+                }catch(ActivityNotFoundException act){
+                    Log.e("Exemplo de chamada", "falha", act);
+
+                }catch(Exception ex){
+                    Log.e("Erro Na chamada","Erro: "+ex.getMessage());
+                }
+            }
+        });
+    }
+    private void verificarCampos(){
+        //Pega o animal da vez que está sendo editado.
+        AnimalApi animal = controladorAnimal.animais.get(extras.getInt("idModificar"));
+        //Pega o Id de quem ta logado no app e verifica se é o mesmo de quem cadastrou o animal.
+        if(false) { // Caso for o mesmo cai no TRUE, senão vai pro else
+            editModificarAnimal.setVisibility(View.VISIBLE);
+            editExcluirAnimal.setVisibility(View.VISIBLE);
+            editLigar.setVisibility(View.INVISIBLE);
+        }else{
+            editModificarAnimal.setVisibility(View.INVISIBLE);
+            editExcluirAnimal.setVisibility(View.INVISIBLE);
+            editLigar.setVisibility(View.VISIBLE);
+        }
     }
 }
