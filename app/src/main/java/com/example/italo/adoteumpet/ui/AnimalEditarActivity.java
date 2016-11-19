@@ -123,7 +123,8 @@ public class AnimalEditarActivity extends AppCompatActivity {
                     Intent chamada = new Intent(Intent.ACTION_DIAL);
 
                     //Pegar o telefone da pessoa que vai estar dentro de animal
-                    chamada.setData(Uri.parse("tel:"+998064079));
+                    String numeroTelefone = "034998064079";
+                    chamada.setData(Uri.parse("tel:"+numeroTelefone));
 
                     startActivity(chamada);
 
