@@ -40,7 +40,7 @@ public class AnimalEditarActivity extends AppCompatActivity {
 
         extras  = getIntent().getExtras();
         int i = extras.getInt("idModificar");
-        animal.modificarAnimal(controladorAnimal.animais.get(i));
+        animal.modificarAnimal(controladorAnimal.getAnimais().get(i));
 
         editNomeAnimal = (EditText) findViewById(R.id.edit_nome_animal);
         editDescricaoAnimal = (EditText) findViewById(R.id.edit_descricao_animal);
@@ -67,7 +67,7 @@ public class AnimalEditarActivity extends AppCompatActivity {
                 AnimalApi animal = new AnimalApi(nome,idade,descricao);
 
 
-                controladorAnimal.animais.get(extras.getInt("idModificar")).modificarAnimal(animal);
+                controladorAnimal.getAnimais().get(extras.getInt("idModificar")).modificarAnimal(animal);
 
                 Intent in = new Intent();
                 setResult(2,in);//Here I am Setting the Requestcode 1, you can put according to your requirement
@@ -79,7 +79,7 @@ public class AnimalEditarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
 
-                AnimalApi animalExcluir = controladorAnimal.animais.get(extras.getInt("idModificar"));
+                AnimalApi animalExcluir = controladorAnimal.getAnimais().get(extras.getInt("idModificar"));
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(IAnimalApi.API_LOCATION)
                         .addConverterFactory(GsonConverterFactory.create())
@@ -139,9 +139,9 @@ public class AnimalEditarActivity extends AppCompatActivity {
     }
     private void verificarCampos(){
         //Pega o animal da vez que está sendo editado.
-        AnimalApi animal = controladorAnimal.animais.get(extras.getInt("idModificar"));
+        AnimalApi animal = controladorAnimal.getAnimais().get(extras.getInt("idModificar"));
         //Pega o Id de quem ta logado no app e verifica se é o mesmo de quem cadastrou o animal.
-        if(true) { // Caso for o mesmo cai no TRUE, senão vai pro else
+        if(false) { // Caso for o mesmo cai no TRUE, senão vai pro else
             editModificarAnimal.setVisibility(View.VISIBLE);
             editExcluirAnimal.setVisibility(View.VISIBLE);
             editLigar.setVisibility(View.INVISIBLE);
@@ -149,6 +149,9 @@ public class AnimalEditarActivity extends AppCompatActivity {
             editModificarAnimal.setVisibility(View.INVISIBLE);
             editExcluirAnimal.setVisibility(View.INVISIBLE);
             editLigar.setVisibility(View.VISIBLE);
+            editNomeAnimal.setEnabled(false);
+            editDescricaoAnimal.setEnabled(false);
+            editIdadeAnimal.setEnabled(false);
         }
     }
 }

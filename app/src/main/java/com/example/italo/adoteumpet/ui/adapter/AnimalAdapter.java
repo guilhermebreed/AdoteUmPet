@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.italo.adoteumpet.R;
-import com.example.italo.adoteumpet.data.model.Animal;
 import com.example.italo.adoteumpet.data.model.AnimalApi;
 
 import java.util.List;
@@ -36,11 +35,16 @@ public class AnimalAdapter extends ArrayAdapter<AnimalApi>{
             view = LayoutInflater.from(context).inflate(R.layout.item, null);
         }
 
+        TextView txtRaca = (TextView) view.findViewById(R.id.tv_racaPet);
+        TextView txtIdade = (TextView) view.findViewById(R.id.tv_idadePet);
         TextView txtDesc = (TextView) view.findViewById(R.id.nome_pet);
         ImageView imgFoto = (ImageView) view.findViewById(R.id.imagem_pet);
-        imgFoto.setImageResource(R.mipmap.dogimg);
-        txtDesc.setText(animal.getNomeAnimal());
 
+        imgFoto.setImageResource(R.mipmap.dogimg);
+
+        txtDesc.setText(" Nome: "+animal.getNomeAnimal());
+        txtIdade.setText(" Idade: "+animal.getIdade());
+        txtRaca.setText(" Raça: "+animal.getRaca());
         return view;
     }
 }
