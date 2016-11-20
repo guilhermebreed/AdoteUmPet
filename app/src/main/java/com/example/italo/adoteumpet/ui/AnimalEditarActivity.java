@@ -141,7 +141,7 @@ public class AnimalEditarActivity extends AppCompatActivity {
         //Pega o animal da vez que está sendo editado.
         AnimalApi animal = controladorAnimal.animais.get(extras.getInt("idModificar"));
         //Pega o Id de quem ta logado no app e verifica se é o mesmo de quem cadastrou o animal.
-        if(false) { // Caso for o mesmo cai no TRUE, senão vai pro else
+        if(true) { // Caso for o mesmo cai no TRUE, senão vai pro else
             editModificarAnimal.setVisibility(View.VISIBLE);
             editExcluirAnimal.setVisibility(View.VISIBLE);
             editLigar.setVisibility(View.INVISIBLE);

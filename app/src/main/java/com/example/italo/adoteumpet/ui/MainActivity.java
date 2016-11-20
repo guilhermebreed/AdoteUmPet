@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private ControladorAnimal controladorAnimal;
-    private AnimalAdapter adapter;
+    static private AnimalAdapter adapter;
     private int requestCode;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //filtro();
             }
         });
-        atualizarLista();
+        controladorAnimal.atualizarLista();
     }
 
     @Override
@@ -128,16 +128,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int codigo, int resultado, Intent intent){
         if(resultado == 1){
             Toast.makeText(this,"Cadastrador com Sucesso!!", Toast.LENGTH_SHORT).show();
-            atualizarLista();
-            adapter.notifyDataSetChanged();
+            controladorAnimal.atualizarLista();
         }else if(resultado == 2) {
             Toast.makeText(this, "Modificado com Sucesso!!", Toast.LENGTH_SHORT).show();
-            atualizarLista();
-            adapter.notifyDataSetChanged();
+            controladorAnimal.atualizarLista();
         }else if(resultado == 3){
             Toast.makeText(this, "Excluido com Sucesso!!", Toast.LENGTH_SHORT).show();
-            atualizarLista();
-            adapter.notifyDataSetChanged();
+            controladorAnimal.atualizarLista();
         }
     }
 
@@ -150,41 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         it.putExtras(extras);
         startActivityForResult(it, 2);
     }
-
-    public void atualizarLista(){
-        //Rest Adapter
-        //URL Base
-        //Rest Adapter
-        //Gson g = new GsonBuilder().registerTypeAdapter(Animal.class, new AnimalDes()).create();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(IAnimalApi.API_LOCATION)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        IAnimalApi service = retrofit.create(IAnimalApi.class);
-        final Call<List<AnimalApi>> animais = service.getAnimais();
-
-        animais.enqueue(new Callback<List<AnimalApi>>() {
-            @Override
-            public void onResponse(Call<List<AnimalApi>> call, Response<List<AnimalApi>> response) {
-                if(response.isSuccessful()){
-                    controladorAnimal.zerarLista(1);
-                    List<AnimalApi> animals = response.body();
-                    controladorAnimal.setAnimais(animals);
-                    controladorAnimal.setAnimaisListaCompleta(animals);
-                    adapter.notifyDataSetChanged();
-                }else{
-                    tv.setText("Erro");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<AnimalApi>> call, Throwable t) {
-                tv.setText("Não foi possível listar");
-            }
-        });
-    }
-
+    //Verificar e colocar na Controlador Animal
     public void filtro(){
        AnimalApi animal = new AnimalApi();
         Retrofit retrofit = new Retrofit.Builder()
@@ -217,5 +180,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+    }
+
+    public static void notificarAdapter(){
+        adapter.notifyDataSetChanged();
     }
 }
