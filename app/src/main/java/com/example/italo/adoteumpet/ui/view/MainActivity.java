@@ -1,13 +1,10 @@
-package com.example.italo.adoteumpet.ui;
+package com.example.italo.adoteumpet.ui.view;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -19,14 +16,10 @@ import android.widget.Toast;
 import java.util.List;
 
 import com.example.italo.adoteumpet.R;
-import com.example.italo.adoteumpet.data.model.Animal;
-import com.example.italo.adoteumpet.data.model.AnimalDes;
 import com.example.italo.adoteumpet.ui.adapter.AnimalAdapter;
 import com.example.italo.adoteumpet.data.model.AnimalApi;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.util.List;
+import com.example.italo.adoteumpet.ui.controller.ControladorAnimal;
+import com.example.italo.adoteumpet.ui.interfaces.api.IAnimalApi;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -134,6 +127,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             controladorAnimal.atualizarLista();
         }else if(resultado == 3){
             Toast.makeText(this, "Excluido com Sucesso!!", Toast.LENGTH_SHORT).show();
+            controladorAnimal.atualizarLista();
+        }else if (resultado == 4){
             controladorAnimal.atualizarLista();
         }
     }

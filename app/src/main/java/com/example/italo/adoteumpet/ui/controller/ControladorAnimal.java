@@ -1,10 +1,10 @@
-package com.example.italo.adoteumpet.ui;
+package com.example.italo.adoteumpet.ui.controller;
 
 import android.util.Log;
-import android.widget.Adapter;
 
-import com.example.italo.adoteumpet.data.model.Animal;
 import com.example.italo.adoteumpet.data.model.AnimalApi;
+import com.example.italo.adoteumpet.ui.view.MainActivity;
+import com.example.italo.adoteumpet.ui.interfaces.api.IAnimalApi;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.italo.adoteumpet.ui;
+package com.example.italo.adoteumpet.ui.view;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -11,8 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.italo.adoteumpet.R;
-import com.example.italo.adoteumpet.data.model.Animal;
 import com.example.italo.adoteumpet.data.model.AnimalApi;
+import com.example.italo.adoteumpet.ui.controller.ControladorAnimal;
+import com.example.italo.adoteumpet.ui.interfaces.api.IAnimalApi;
 
 import retrofit2.Call;
 import retrofit2.Callback;

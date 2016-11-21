@@ -1,4 +1,4 @@
-package com.example.italo.adoteumpet.ui;
+package com.example.italo.adoteumpet.ui.view;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -7,15 +7,14 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.italo.adoteumpet.R;
 import com.example.italo.adoteumpet.data.model.Animal;
 import com.example.italo.adoteumpet.data.model.AnimalApi;
+import com.example.italo.adoteumpet.ui.controller.ControladorAnimal;
+import com.example.italo.adoteumpet.ui.interfaces.api.IAnimalApi;
 
 //import retrofit.Callback;
 //import retrofit.RestAdapter;

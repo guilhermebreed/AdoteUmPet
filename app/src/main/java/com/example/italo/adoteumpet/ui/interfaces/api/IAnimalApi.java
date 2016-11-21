@@ -1,4 +1,4 @@
-package com.example.italo.adoteumpet.ui;
+package com.example.italo.adoteumpet.ui.interfaces.api;
 
 import com.example.italo.adoteumpet.data.model.Animal;
 import com.example.italo.adoteumpet.data.model.AnimalApi;
@@ -11,17 +11,16 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /**
  * Created by guilh on 02/11/2016.
  */
 
-public interface IAnimalApi {
+public interface IAnimalApi extends ApiConection{
     //@GET("/animal/")
     //Call<AnimalApi> animais();
     //public void getFeed(@Query("id") String animal, Callback<IAnimalApi> response);
-    String API_LOCATION = "http://35.163.80.15:3000/api/";
+    //String API_LOCATION = "http://35.163.80.15:3000/api/";
 
     @GET("Animal")
     Call<List<AnimalApi>> getAnimais();
