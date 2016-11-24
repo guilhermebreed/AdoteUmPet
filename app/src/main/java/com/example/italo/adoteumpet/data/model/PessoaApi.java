@@ -92,4 +92,12 @@ public class PessoaApi {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public boolean verificarSenhaCorreta(String user, String password){
+        if ((user.equals(getUsuario())) && (password.equals(getSenha()))){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

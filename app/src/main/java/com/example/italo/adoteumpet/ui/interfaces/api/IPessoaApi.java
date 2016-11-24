@@ -16,9 +16,15 @@ import retrofit2.http.Path;
  * Created by Italo on 20/11/2016.
  */
 
-public interface IPessoaApi extends ApiConection{
+public interface IPessoaApi{
+
+    final String API_LOCATION = "http://35.163.80.15:3000/api/v1.1/";
+
     @GET("Pessoa")
-    Call<List<PessoaApi>> getPessoa();
+    Call<List<PessoaApi>> getPessoas();
+
+    @GET("Pessoa/{id}")
+    Call<PessoaApi> buscarPessoaID(@Path("id") String id);
 
     @POST("Pessoa")
     Call<PessoaApi> postPessoa(@Body PessoaApi pessoaApi); //@Body: Todos os parâmetro da Pessoa

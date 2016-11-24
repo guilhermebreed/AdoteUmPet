@@ -19,6 +19,7 @@ import com.example.italo.adoteumpet.R;
 import com.example.italo.adoteumpet.ui.adapter.AnimalAdapter;
 import com.example.italo.adoteumpet.data.model.AnimalApi;
 import com.example.italo.adoteumpet.ui.controller.ControladorAnimal;
+import com.example.italo.adoteumpet.ui.controller.PessoaController;
 import com.example.italo.adoteumpet.ui.interfaces.api.IAnimalApi;
 
 import retrofit2.Call;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private ControladorAnimal controladorAnimal;
+    private PessoaController pessoaController;
     static private AnimalAdapter adapter;
     private int requestCode;
     @Override
@@ -57,7 +59,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pesquisa = (EditText) findViewById(R.id.filtroRaca);
         pesquisaBtn = (Button) findViewById(R.id.btnFiltro);
 
+        pessoaController = new PessoaController();
         controladorAnimal = new ControladorAnimal();
+
         adapter = new AnimalAdapter(this,controladorAnimal.getAnimais());
         animaisList.setAdapter(adapter);
         animaisList.setOnItemClickListener(this);
@@ -109,7 +113,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //filtro();
             }
         });
-        controladorAnimal.atualizarLista();
+        if(pessoaController.alguemLogado()) {
+            controladorAnimal.atualizarLista();
+        }else{
+            startActivityForResult(new Intent(this, LoginAcitivity.class), 2);
+        }
     }
 
     @Override
@@ -130,6 +138,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             controladorAnimal.atualizarLista();
         }else if (resultado == 4){
             controladorAnimal.atualizarLista();
+        }else if (resultado == 5){
+            controladorAnimal.atualizarLista();
+            Toast.makeText(this, "Seja bem vindo ao sistema adote um pet!",Toast.LENGTH_SHORT).show();
+        }else if(resultado == 6){
+            finish();
         }
     }
 

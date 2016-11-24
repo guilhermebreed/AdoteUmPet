@@ -13,6 +13,7 @@ import android.widget.EditText;
 import com.example.italo.adoteumpet.R;
 import com.example.italo.adoteumpet.data.model.AnimalApi;
 import com.example.italo.adoteumpet.ui.controller.ControladorAnimal;
+import com.example.italo.adoteumpet.ui.controller.PessoaController;
 import com.example.italo.adoteumpet.ui.interfaces.api.IAnimalApi;
 
 import retrofit2.Call;
@@ -31,8 +32,11 @@ public class AnimalEditarActivity extends AppCompatActivity {
     private Button editLigar;
 
     private ControladorAnimal controladorAnimal = new ControladorAnimal();
+    private PessoaController pessoaController = new PessoaController();
     private AnimalApi animal = new AnimalApi();
     private Bundle extras;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +69,15 @@ public class AnimalEditarActivity extends AppCompatActivity {
                 String descricao = editDescricaoAnimal.getText().toString();
                 int idade;
                 idade = Integer.parseInt(editIdadeAnimal.getText().toString());
-                AnimalApi animal = new AnimalApi(nome,idade,descricao);
+                AnimalApi animalModificar = new AnimalApi();
+                animalModificar.setNomeAnimal(nome);
+                animalModificar.setDescricao(descricao);
+                animalModificar.setIdade(idade);
+                animalModificar.setRaca(animal.getRaca());
+                animalModificar.setIdPessoa(animal.getIdPessoa());
+                animalModificar.setContato(animal.getContato());
 
-
-                controladorAnimal.getAnimais().get(extras.getInt("idModificar")).modificarAnimal(animal);
+                controladorAnimal.getAnimais().get(extras.getInt("idModificar")).modificarAnimal(animalModificar);
 
                 Intent in = new Intent();
                 setResult(2,in);//Here I am Setting the Requestcode 1, you can put according to your requirement
@@ -124,7 +133,8 @@ public class AnimalEditarActivity extends AppCompatActivity {
                     Intent chamada = new Intent(Intent.ACTION_DIAL);
 
                     //Pegar o telefone da pessoa que vai estar dentro de animal
-                    String numeroTelefone = "034998064079";
+                    String numeroTelefone = controladorAnimal.getAnimais().get(extras.getInt("idModificar")).getContato();
+                    Log.e("Contato :","Telefone"+numeroTelefone);
                     chamada.setData(Uri.parse("tel:"+numeroTelefone));
 
                     startActivity(chamada);
@@ -142,7 +152,7 @@ public class AnimalEditarActivity extends AppCompatActivity {
         //Pega o animal da vez que está sendo editado.
         AnimalApi animal = controladorAnimal.getAnimais().get(extras.getInt("idModificar"));
         //Pega o Id de quem ta logado no app e verifica se é o mesmo de quem cadastrou o animal.
-        if(false) { // Caso for o mesmo cai no TRUE, senão vai pro else
+        if(animal.getIdPessoa().equals(pessoaController.getPessoaLogada().getIdPessoa())) { // Caso for o mesmo cai no TRUE, senão vai pro else
             editModificarAnimal.setVisibility(View.VISIBLE);
             editExcluirAnimal.setVisibility(View.VISIBLE);
             editLigar.setVisibility(View.INVISIBLE);

@@ -14,6 +14,7 @@ import com.example.italo.adoteumpet.R;
 import com.example.italo.adoteumpet.data.model.Animal;
 import com.example.italo.adoteumpet.data.model.AnimalApi;
 import com.example.italo.adoteumpet.ui.controller.ControladorAnimal;
+import com.example.italo.adoteumpet.ui.controller.PessoaController;
 import com.example.italo.adoteumpet.ui.interfaces.api.IAnimalApi;
 
 //import retrofit.Callback;
@@ -40,6 +41,8 @@ public class AnimalActivity extends AppCompatActivity{
     private int ra;
     private String textoTipoAnimal;
     private int tip;
+
+    private PessoaController pessoaController = new PessoaController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,11 +91,13 @@ public class AnimalActivity extends AppCompatActivity{
 
                 IAnimalApi service = retrofit.create(IAnimalApi.class);
 
-                    Animal animal = new Animal();
+                    AnimalApi animal = new AnimalApi();
                     animal.setNomeAnimal(cadNomeAnimal.getText().toString());
                     animal.setDescricao(cadDescricaoAnimal.getText().toString());
                     animal.setIdade(Integer.parseInt(cadIdadeAnimal.getText().toString()));
                     animal.setRaca(cadRacaAnimal.getText().toString());
+                    animal.setIdPessoa(pessoaController.getPessoaLogada().getIdPessoa());
+                    animal.setContato(pessoaController.getPessoaLogada().getContato());
 
                     Call<AnimalApi> animalPost = service.postAnimal(animal);
                     animalPost.enqueue(new Callback<AnimalApi>() {

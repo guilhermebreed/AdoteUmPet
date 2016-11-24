@@ -3,7 +3,7 @@
     package="com.example.italo.adoteumpet">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".ui.view.AnimalActivity" />
         <activity android:name=".ui.view.AnimalEditarActivity" />
-        <activity android:name=".ui.view.PessoaCadastroEditarActivity"></activity>
+        <activity android:name=".ui.view.PessoaCadastroEditarActivity" />
+        <activity android:name=".ui.view.LoginAcitivity"></activity>
     </application>
 
 </manifest>

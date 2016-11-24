@@ -16,17 +16,19 @@ import retrofit2.http.Path;
  * Created by guilh on 02/11/2016.
  */
 
-public interface IAnimalApi extends ApiConection{
+public interface IAnimalApi{
     //@GET("/animal/")
     //Call<AnimalApi> animais();
     //public void getFeed(@Query("id") String animal, Callback<IAnimalApi> response);
     //String API_LOCATION = "http://35.163.80.15:3000/api/";
 
+    final String API_LOCATION = "http://35.163.80.15:3000/api/v1.1/";
+
     @GET("Animal")
     Call<List<AnimalApi>> getAnimais();
 
     @POST("Animal")
-    Call<AnimalApi> postAnimal(@Body Animal animal); //@Body: Todos os parâmetro do Animal
+    Call<AnimalApi> postAnimal(@Body AnimalApi animal); //@Body: Todos os parâmetro do Animal
 
     @DELETE("Animal/{id}")
     Call<AnimalApi> deleteAnimal(@Path("id") String id);

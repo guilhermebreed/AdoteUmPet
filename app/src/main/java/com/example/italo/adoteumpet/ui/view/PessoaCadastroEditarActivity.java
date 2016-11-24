@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.italo.adoteumpet.R;
 import com.example.italo.adoteumpet.data.model.PessoaApi;
+import com.example.italo.adoteumpet.ui.controller.PessoaController;
 import com.example.italo.adoteumpet.ui.interfaces.api.IPessoaApi;
 
 import java.text.NumberFormat;
@@ -60,22 +61,28 @@ public class PessoaCadastroEditarActivity extends AppCompatActivity {
             public void onClick(View v){
                 //Rest Adapte
                 if(montarEndereco() != null && verificarTelefone()) {
-                    Retrofit retrofit = new Retrofit.Builder()
+                    /*Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl(IPessoaApi.API_LOCATION)
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
 
                     IPessoaApi service = retrofit.create(IPessoaApi.class);
-
+                    */
                     PessoaApi pessoa = new PessoaApi();
                     pessoa.setNomePessoa(txtNomePessoa.getText().toString());
                     pessoa.setEndereco(montarEndereco());
                     pessoa.setContato(txtContato.getText().toString());
-                    //falta usuário e senha depois eu arrumo
                     pessoa.setUsuario(txtUsuario.getText().toString());
                     pessoa.setSenha(txtSenha.getText().toString());
 
-                    Call<PessoaApi> pessoaPost = service.postPessoa(pessoa);
+                    if(PessoaController.salvarPessoa(pessoa)){
+                        Intent in = new Intent();
+                        setResult(1, in);//Here I am Setting the Requestcode 1, you can put according to your requirement
+                        finish();
+                    }else{
+                        Toast.makeText(PessoaCadastroEditarActivity.this,"Falha no cadastro.",Toast.LENGTH_SHORT);
+                    }
+                    /*Call<PessoaApi> pessoaPost = service.postPessoa(pessoa);
                     pessoaPost.enqueue(new Callback<PessoaApi>() {
                         @Override
                         public void onResponse(Call<PessoaApi> call, Response<PessoaApi> response) {
@@ -93,9 +100,18 @@ public class PessoaCadastroEditarActivity extends AppCompatActivity {
                         public void onFailure(Call<PessoaApi> call, Throwable t) {
                             Log.d("Salvar Pessoa", "Erro: " + t.getMessage());
                         }
-                    });
+                    });*/
+
                 }else{
                 }
+            }
+        });
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent();
+                setResult(2, in);//Here I am Setting the Requestcode 1, you can put according to your requirement
+                finish();
             }
         });
     }
