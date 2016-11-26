@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -31,9 +33,8 @@ import retrofit2.Retrofit;
 //import retrofit2.client.Response;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    private Button newButton;
     private Button pesquisaBtn;
     private ListView animaisList;
     private TextView tv;
@@ -53,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        newButton = (Button) findViewById(R.id.new_button);
         animaisList = (ListView) findViewById(R.id.animais_list);
         tv = (TextView) findViewById(R.id.testid);
         pesquisa = (EditText) findViewById(R.id.filtroRaca);
@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter = new AnimalAdapter(this,controladorAnimal.getAnimais());
         animaisList.setAdapter(adapter);
         animaisList.setOnItemClickListener(this);
-        newButton.setOnClickListener(this);
 
         pesquisa.addTextChangedListener(new TextWatcher() {
             @Override
@@ -120,9 +119,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //Menu
     @Override
-    public void onClick(View v){
-        startActivityForResult(new Intent(this, AnimalActivity.class), 1);
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        if(id == R.id.cadastra){
+            startActivityForResult(new Intent(this, AnimalActivity.class), 1);
+            return true;
+        }
+        return  super.onOptionsItemSelected(item);
     }
 
     @Override

@@ -14,6 +14,7 @@
         android:id="@+id/cad_nome_animal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/editttext_states"
         android:text=""/>
 
     <TextView
@@ -25,6 +26,7 @@
         android:id="@+id/cad_idade_animal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/editttext_states"
         android:text=""/>
 
     <TextView
@@ -36,6 +38,7 @@
         android:id="@+id/cad_descricao_animal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/editttext_states"
         android:text=""
         android:gravity="top|center"
         />
@@ -49,6 +52,7 @@
         android:id="@+id/cad_raca_animal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/editttext_states"
         android:text=""
         android:gravity="top|center"
         />
@@ -88,6 +92,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Incluir"
-        android:background="#008000"
-        android:textColor="#eeee"/>
+        android:background="#9055A2"
+        android:textColor="#fff"
+        android:layout_gravity="bottom"
+        android:drawableLeft="@drawable/ic_add"
+        />
 </LinearLayout>

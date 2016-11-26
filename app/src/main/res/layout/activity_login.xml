@@ -3,28 +3,36 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#82FFAD">
+    android:background="#ffff">
+
+    <ImageView
+        android:id="@+id/imgLogin"
+        android:layout_width="fill_parent"
+        android:layout_height="400px"
+        android:src="@drawable/logo"
+        />
 
     <EditText
         android:id="@+id/login_user"
-        android:layout_width="2.3in"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/editttext_states"
         android:selectAllOnFocus="true"
         android:hint="Usuário"
-        android:layout_marginLeft="0.1in"
-        android:layout_marginTop="1.2in"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
+        android:drawableRight="@drawable/ic_action_name"
         android:textSize="18sp"/>
 
     <EditText
         android:id="@+id/login_password"
-        android:layout_width="2.3in"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/editttext_states"
         android:selectAllOnFocus="true"
         android:hint="Senha"
         android:inputType="textPassword"
-        android:layout_marginLeft="0.1in"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
+        android:drawableRight="@drawable/ic_pass"
         android:textSize="18sp"/>
 
     <GridLayout
@@ -41,7 +49,7 @@
             android:layout_columnSpan="1"
             android:text="Esqueci minha senha"
             android:layout_marginLeft="25px"
-            android:textColor="#0429f9"/>
+            android:textColor="#D499B9"/>
         <TextView
             android:id="@+id/login_cadastro"
             android:layout_width="wrap_content"
@@ -51,23 +59,23 @@
             android:textSize="18sp"
             android:text="cadastrar"
             android:layout_marginRight="25px"
-            android:textColor="#0429f9"/>
+            android:textColor="#D499B9"/>
     </GridLayout>
     <Button
         android:id="@+id/login_btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#008000"
-        android:textColor="#ffffff"
+        android:background="#D499B9"
+        android:textColor="#ffff"
         android:text="Login"
-        android:layout_marginTop="0.7in"
+        android:layout_marginTop="0.4in"
         />
     <Button
         android:id="@+id/login_btnCancelar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ff040c"
-        android:textColor="#080808"
+        android:background="#ffff"
+        android:textColor="#D499B9"
         android:text="Cancelar"
         android:layout_gravity="bottom"/>
 </LinearLayout>
