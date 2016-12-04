@@ -30,18 +30,23 @@ public class PessoaApi {
     private String usuario;
 
     @Expose
+    @SerializedName("email")
+    private String email;
+
+    @Expose
     @SerializedName("senha")
     private String senha;
 
     public PessoaApi() {
     }
 
-    public PessoaApi(String idPessoa, String nomePessoa, String endereco, String contato, String usuario, String senha) {
+    public PessoaApi(String idPessoa, String nomePessoa, String endereco, String contato, String usuario, String email, String senha) {
         this.idPessoa = idPessoa;
         this.nomePessoa = nomePessoa;
         this.endereco = endereco;
         this.contato = contato;
         this.usuario = usuario;
+        this.email = email;
         this.senha = senha;
     }
 
@@ -84,6 +89,10 @@ public class PessoaApi {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
+
+    public String getEmail(){return email;}
+
+    public void setEmail(String email){this.email = email;}
 
     public String getSenha() {
         return senha;

@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         int id = item.getItemId();
 
         if(id == R.id.cadastra){
-            startActivityForResult(new Intent(this, AnimalActivity.class), 1);
+            startActivityForResult(new Intent(this, UploadFoto.class), 1);
             return true;
         }
         return  super.onOptionsItemSelected(item);

@@ -1,7 +1,12 @@
 package com.example.italo.adoteumpet.ui.view;
 
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -9,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.italo.adoteumpet.R;
 import com.example.italo.adoteumpet.data.model.Animal;
@@ -16,6 +22,7 @@ import com.example.italo.adoteumpet.data.model.AnimalApi;
 import com.example.italo.adoteumpet.ui.controller.ControladorAnimal;
 import com.example.italo.adoteumpet.ui.controller.PessoaController;
 import com.example.italo.adoteumpet.ui.interfaces.api.IAnimalApi;
+import com.squareup.picasso.Picasso;
 
 //import retrofit.Callback;
 //import retrofit.RestAdapter;
@@ -36,11 +43,14 @@ public class AnimalActivity extends AppCompatActivity{
     private EditText cadIdadeAnimal;
     private EditText cadRacaAnimal;
     private Button cadIncluirAnimal;
+    private ImageView iv;
     private ControladorAnimal controladorAnimal = new ControladorAnimal();
     private String textoRaca;
     private int ra;
     private String textoTipoAnimal;
     private int tip;
+
+    public static final int  IMAGEM_INTERNA = 12;
 
     private PessoaController pessoaController = new PessoaController();
 
@@ -49,11 +59,13 @@ public class AnimalActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.animal_cadastro);
 
+
         cadNomeAnimal = (EditText) findViewById(R.id.cad_nome_animal);
         cadDescricaoAnimal = (EditText) findViewById(R.id.cad_descricao_animal);
         cadIdadeAnimal = (EditText) findViewById(R.id.cad_idade_animal);
         cadRacaAnimal = (EditText) findViewById(R.id.cad_raca_animal);
         cadIncluirAnimal = (Button) findViewById(R.id.cad_btnIncluir);
+        iv = (ImageView) findViewById(R.id.img);
 
         /*//Spinner Raça
         // Cria um ArraAdapter usando um array de string e um layout padrão de spinner
@@ -121,6 +133,38 @@ public class AnimalActivity extends AppCompatActivity{
 
             }
         });
+    }
+
+    public void pegarImg(View view){
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGEM_INTERNA);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if(requestCode == IMAGEM_INTERNA){
+            if(resultCode == RESULT_OK){
+                Uri imagemSelecionada = intent.getData();
+
+                String[] colunas = {MediaStore.Images.Media.DATA}; // Coluna _data //Recursos nativos do AS para acessar imagem
+
+                Cursor cursor = getContentResolver().query(imagemSelecionada, colunas, null, null, null); //Outras aplicações acessam os recursos de sua aplicação através da Interface Content
+                cursor.moveToFirst();
+
+                int indexColuna = cursor.getColumnIndex(colunas [0]);
+                String pathImg   = cursor.getString(indexColuna);
+                cursor.close();
+
+                Bitmap bitmap = BitmapFactory.decodeFile(pathImg);
+                //Picasso.with(getApplicationContext()).load(pathImg).into(iv);
+                iv.setImageBitmap(bitmap);
+
+            }else{
+                Log.i("", "Deu merda");
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, intent);
     }
 
     public boolean verificarCampos(){

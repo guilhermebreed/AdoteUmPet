@@ -57,7 +57,7 @@
             android:layout_column="3"
             android:layout_row="0"
             android:textSize="18sp"
-            android:text="cadastrar"
+            android:text="Cadastrar"
             android:layout_marginRight="25px"
             android:textColor="#D499B9"/>
     </GridLayout>
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:background="#D499B9"
         android:textColor="#ffff"
-        android:text="Login"
+        android:text="Entrar"
         android:layout_marginTop="0.4in"
         />
     <Button

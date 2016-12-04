@@ -33,6 +33,7 @@ public class PessoaCadastroEditarActivity extends AppCompatActivity {
     private EditText txtCidade;
     private EditText txtContato;
     private EditText txtUsuario;
+    private EditText txtEmail;
     private EditText txtSenha;
 
     private Button btnConfirmar;
@@ -51,6 +52,7 @@ public class PessoaCadastroEditarActivity extends AppCompatActivity {
         txtCidade = (EditText) findViewById(R.id.cad_pessoa_cidade);
         txtContato = (EditText) findViewById(R.id.cad_pessoa_contato);
         txtUsuario = (EditText) findViewById(R.id.cad_pessoa_usuario);
+        txtEmail = (EditText) findViewById(R.id.email);
         txtSenha = (EditText) findViewById(R.id.cad_pessoa_senha);
 
         btnConfirmar = (Button) findViewById(R.id.btnCadastrar);
@@ -73,6 +75,7 @@ public class PessoaCadastroEditarActivity extends AppCompatActivity {
                     pessoa.setEndereco(montarEndereco());
                     pessoa.setContato(txtContato.getText().toString());
                     pessoa.setUsuario(txtUsuario.getText().toString());
+                    pessoa.setEmail(txtEmail.getText().toString());
                     pessoa.setSenha(txtSenha.getText().toString());
 
                     if(PessoaController.salvarPessoa(pessoa)){

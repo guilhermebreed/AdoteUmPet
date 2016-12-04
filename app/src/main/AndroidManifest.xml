@@ -3,6 +3,7 @@
     package="com.example.italo.adoteumpet">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -21,6 +22,7 @@
         <activity android:name=".ui.view.AnimalActivity" />
         <activity android:name=".ui.view.AnimalEditarActivity" />
         <activity android:name=".ui.view.PessoaCadastroEditarActivity" />
+        <activity android:name=".ui.view.UploadFoto" />
         <activity android:name=".ui.view.LoginAcitivity"></activity>
     </application>
 
