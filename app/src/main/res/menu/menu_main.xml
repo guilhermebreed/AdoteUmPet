@@ -5,5 +5,7 @@
     <item android:id="@+id/cadastra"
         android:title="@string/opcaoMenu"
         android:orderInCategory="100" app:showAsAction="never"/>
-
+    <item android:id="@+id/mnu_logoff"
+        android:title="@string/opcao2Menu"
+        android:orderInCategory="101" app:showAsAction="never"/>
 </menu>

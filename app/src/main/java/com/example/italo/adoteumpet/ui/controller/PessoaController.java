@@ -129,5 +129,7 @@ public class PessoaController {
         }
         return false;
     }
-
+    public static void fazerLogoff(){
+        setPessoaLogada(null);
+    }
 }
