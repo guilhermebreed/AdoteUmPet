@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -104,8 +105,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     try {
                         Integer.parseInt(raca);
                         controladorAnimal.getAnimaisOrdenado(raca, 3);
-                    }catch (Exception ex){
+                    }catch (NumberFormatException nbex){
                         controladorAnimal.getAnimaisOrdenado(raca, 1);
+                    }catch (Exception ex){
+                        Log.e("Erro conversão: ", ""+ex.getMessage(),ex);
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -134,6 +137,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if(id == R.id.cadastra){
             startActivityForResult(new Intent(this, UploadFoto.class), 1);
             return true;
+        }
+        if(id == R.id.mnu_logoff){
+            PessoaController.fazerLogoff();
+            startActivityForResult(new Intent(this, LoginAcitivity.class), 2);
         }
         return  super.onOptionsItemSelected(item);
     }

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Adote Um Pet</string>
     <string name="opcaoMenu">Cadastrar um Pet</string>
+    <string name="opcao2Menu">Logoff</string>
     <string-array name="Raca">
         <item>Bulldog</item>
         <item>Pastor Alemão</item>
