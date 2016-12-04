@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private int opcao;
     //private AnimalApi animal;
     AnimalApi animal = new AnimalApi();
+    public static int fotos[] = {R.mipmap.dog1,R.mipmap.dog2,R.mipmap.dogimg};
+    public static int qualestou = 0;
     //A String de localização da API
 
 
@@ -63,9 +65,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         pessoaController = new PessoaController();
         controladorAnimal = new ControladorAnimal();
 
+        pesquisaBtn.setVisibility(View.INVISIBLE);
+
         adapter = new AnimalAdapter(this,controladorAnimal.getAnimais());
         animaisList.setAdapter(adapter);
         animaisList.setOnItemClickListener(this);
+
+
 
         pesquisa.addTextChangedListener(new TextWatcher() {
             @Override
@@ -135,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         int id = item.getItemId();
 
         if(id == R.id.cadastra){
-            startActivityForResult(new Intent(this, UploadFoto.class), 1);
+            startActivityForResult(new Intent(this, AnimalActivity.class), 1);
             return true;
         }
         if(id == R.id.mnu_logoff){

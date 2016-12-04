@@ -5,6 +5,12 @@
     android:layout_height="fill_parent"
     android:weightSum="1">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/cad_animalImg"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,6 +40,7 @@
     android:layout_height="wrap_content"
     android:text="Descricao"
     android:textSize="20sp"/>
+
     <EditText
         android:id="@+id/cad_descricao_animal"
         android:layout_width="fill_parent"
@@ -57,28 +64,24 @@
         android:gravity="top|center"
         />
 
-    <ImageView
-        android:id="@+id/img"
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:orientation="vertical"
+        android:columnCount="2"
+        android:rowCount="2">
 
 
         <Button
-            android:id="@+id/btn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Escolher Imagem"
-            android:layout_weight="1"
-            android:onClick="pegarImg"/>
+            android:text="Selecionar Imagem"
+            android:id="@+id/uploadimg"
+            android:layout_row="1"
+            android:layout_column="1"/>
 
 
-    </LinearLayout>
+    </GridLayout>
 
 
 

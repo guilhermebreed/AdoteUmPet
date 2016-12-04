@@ -36,16 +36,22 @@ public class AnimalApi {
     @SerializedName("contato")
     private String contato;
 
-    public AnimalApi() {
-    }
+    @Expose
+    @SerializedName("foto")
+    private String foto;
 
-    public AnimalApi(String nomeAnimal, String raca, Integer idade, String descricao, String idPessoa, String contato) {
+    public AnimalApi(String id, String nomeAnimal, String raca, Integer idade, String descricao, String idPessoa, String contato, String foto) {
+        this.id = id;
         this.nomeAnimal = nomeAnimal;
         this.raca = raca;
         this.idade = idade;
         this.descricao = descricao;
         this.idPessoa = idPessoa;
         this.contato = contato;
+        this.foto = foto;
+    }
+
+    public AnimalApi() {
     }
 
     public String getId() {
@@ -102,6 +108,14 @@ public class AnimalApi {
 
     public void setContato(String contato) {
         this.contato = contato;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public void modificarAnimal(AnimalApi animal) {

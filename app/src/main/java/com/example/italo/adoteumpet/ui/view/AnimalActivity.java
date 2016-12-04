@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.italo.adoteumpet.R;
 import com.example.italo.adoteumpet.data.model.Animal;
@@ -43,12 +44,14 @@ public class AnimalActivity extends AppCompatActivity{
     private EditText cadIdadeAnimal;
     private EditText cadRacaAnimal;
     private Button cadIncluirAnimal;
+    private Button uploadImagem;
     private ImageView iv;
     private ControladorAnimal controladorAnimal = new ControladorAnimal();
     private String textoRaca;
     private int ra;
     private String textoTipoAnimal;
     private int tip;
+    private String caminhoFoto = "";
 
     public static final int  IMAGEM_INTERNA = 12;
 
@@ -65,6 +68,7 @@ public class AnimalActivity extends AppCompatActivity{
         cadIdadeAnimal = (EditText) findViewById(R.id.cad_idade_animal);
         cadRacaAnimal = (EditText) findViewById(R.id.cad_raca_animal);
         cadIncluirAnimal = (Button) findViewById(R.id.cad_btnIncluir);
+        uploadImagem = (Button) findViewById(R.id.uploadimg);
         iv = (ImageView) findViewById(R.id.img);
 
         /*//Spinner Raça
@@ -92,6 +96,19 @@ public class AnimalActivity extends AppCompatActivity{
         textoTipoAnimal = spnTipoAnimal.getSelectedItem().toString();
         tip = spnRaca.getSelectedItemPosition();*/
 
+        uploadImagem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle extras = new Bundle();
+                extras.putString("imgAtual","");
+
+                Intent intent = new Intent(AnimalActivity.this, UploadFoto.class);
+                intent.putExtras(extras);
+
+                startActivityForResult(intent,1);
+            }
+        });
+
         cadIncluirAnimal.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -110,6 +127,7 @@ public class AnimalActivity extends AppCompatActivity{
                     animal.setRaca(cadRacaAnimal.getText().toString());
                     animal.setIdPessoa(pessoaController.getPessoaLogada().getIdPessoa());
                     animal.setContato(pessoaController.getPessoaLogada().getContato());
+                    animal.setFoto(caminhoFoto);
 
                     Call<AnimalApi> animalPost = service.postAnimal(animal);
                     animalPost.enqueue(new Callback<AnimalApi>() {
@@ -135,7 +153,29 @@ public class AnimalActivity extends AppCompatActivity{
         });
     }
 
-    public void pegarImg(View view){
+    protected void onActivityResult(int codigo, int resultado, Intent intent){
+        if(resultado == 1){
+            Toast.makeText(this,"Foto enviada!!!",Toast.LENGTH_SHORT);
+            Bundle extra = intent.getExtras();
+            caminhoFoto = extra.getString("imgAtual");
+            Log.e("Teste Imagem",caminhoFoto);
+            //iv.setImageResource(ControladorAnimal.converterImagemCerta(caminhoFoto));
+            Log.e("Teste Imagem",caminhoFoto);
+        }
+    }
+
+    public void uploadImagem(){
+        UploadFoto upload = new UploadFoto();
+        upload.upload();
+
+    }
+
+    public void pegarFoto(){
+        UploadFoto upload = new UploadFoto();
+        upload.getFoto();
+    }
+
+ /*   public void pegarImg(View view){
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, IMAGEM_INTERNA);
@@ -166,6 +206,8 @@ public class AnimalActivity extends AppCompatActivity{
         }
         super.onActivityResult(requestCode, resultCode, intent);
     }
+
+    */
 
     public boolean verificarCampos(){
         int resultado = 0; // resultado os valores são 1 para cadNomeAnimal, 2 para cadIdadeAnimal, e 5 para cadDescricaoAnimal

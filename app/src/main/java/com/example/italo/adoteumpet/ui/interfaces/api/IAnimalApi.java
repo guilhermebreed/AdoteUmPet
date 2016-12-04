@@ -22,7 +22,7 @@ public interface IAnimalApi{
     //public void getFeed(@Query("id") String animal, Callback<IAnimalApi> response);
     //String API_LOCATION = "http://35.163.80.15:3000/api/";
 
-    final String API_LOCATION = "http://35.163.80.15:3000/api/v1.1/";
+    final String API_LOCATION = "http://192.168.1.6:3000/api/v1.1/";
 
     @GET("Animal")
     Call<List<AnimalApi>> getAnimais();

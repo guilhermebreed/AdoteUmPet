@@ -1,13 +1,33 @@
 package com.example.italo.adoteumpet.ui.controller;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.CursorLoader;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.italo.adoteumpet.R;
 import com.example.italo.adoteumpet.data.model.AnimalApi;
 import com.example.italo.adoteumpet.ui.view.MainActivity;
 import com.example.italo.adoteumpet.ui.interfaces.api.IAnimalApi;
+import com.example.italo.adoteumpet.ui.view.UploadFoto;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Future;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,11 +35,16 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.italo.adoteumpet.R.mipmap.dog1;
+
 /**
  * Created by Italo on 06/10/2016.
  */
 
 public class ControladorAnimal {
+    private static ImageView img;
+    private static String path;
+
     private static List<AnimalApi> animais = new ArrayList<>();
     private static List<AnimalApi> animaisListaCompleta = new ArrayList<>();
     public static List<AnimalApi> getAnimais() {
@@ -108,5 +133,17 @@ public class ControladorAnimal {
                 Log.e("Erro ao Tentar Conectar","Não foi possível conectar");
             }
         });
+
+    }
+
+    //Upload de fotos
+    public static int converterImagemCerta(String nome){
+        if(nome.equalsIgnoreCase("dog1")){
+            return R.mipmap.dog1;
+        }else if(nome.equalsIgnoreCase("dog2")){
+            return R.mipmap.dog2;
+        }else{
+            return R.mipmap.dogimg;
+        }
     }
 }

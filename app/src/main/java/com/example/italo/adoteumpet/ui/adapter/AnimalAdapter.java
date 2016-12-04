@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.example.italo.adoteumpet.R;
 import com.example.italo.adoteumpet.data.model.AnimalApi;
+import com.example.italo.adoteumpet.ui.controller.ControladorAnimal;
+import com.example.italo.adoteumpet.ui.view.MainActivity;
 
 import java.util.List;
 
@@ -40,8 +42,21 @@ public class AnimalAdapter extends ArrayAdapter<AnimalApi>{
         TextView txtDesc = (TextView) view.findViewById(R.id.nome_pet);
         ImageView imgFoto = (ImageView) view.findViewById(R.id.imagem_pet);
 
-        imgFoto.setImageResource(R.mipmap.dogimg);
+        /*if(MainActivity.qualestou >= 2) {
+            imgFoto.setImageResource(R.mipmap.dog1);
+            MainActivity.qualestou = 0;
+        }else{
 
+            imgFoto.setImageResource(MainActivity.fotos[MainActivity.qualestou]);
+            MainActivity.qualestou++;
+        }
+        */
+        ControladorAnimal controladorAnimal = new ControladorAnimal();
+        if(animal.getFoto() == null) {
+
+        }else {
+            imgFoto.setImageResource(controladorAnimal.converterImagemCerta(animal.getFoto()));
+        }
         txtDesc.setText(" Nome: "+animal.getNomeAnimal());
         txtIdade.setText(" Idade: "+animal.getIdade());
         txtRaca.setText(" Raça: "+animal.getRaca());
